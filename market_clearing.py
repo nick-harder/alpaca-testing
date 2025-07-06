@@ -71,6 +71,21 @@ def build_model(config, allow_simultaneous_import_export=False, allow_cross_flow
         return gen + inflow == m.D[i] + outflow
     m.balance = pyo.Constraint(m.N, rule=balance_rule)
 
+    # 4–5) optional: forbid simultaneous import & export
+    if not allow_simultaneous_import_export:
+        m.is_importer = pyo.Var(m.N, within=pyo.Binary)
+
+        # importer ⇒ no exports from that node
+        def no_export_rule(m, i, j):
+            return m.f[i, j] <= m.Fbar[i, j] * (1 - m.is_importer[i])
+        m.no_export = pyo.Constraint(m.U, rule=no_export_rule)
+
+        # exporter ⇒ no imports into that node
+        def no_import_rule(m, i, j):
+            # negative f[i,j] means flow from j→i
+            return m.f[i, j] >= -m.Fbar[i, j] * m.is_importer[i]
+        m.no_import = pyo.Constraint(m.U, rule=no_import_rule)
+
     # Objective: minimize total procurement cost
     m.obj = pyo.Objective(
         expr=sum(m.p[i, k] * m.x[i, k] for (i, k) in m.S),

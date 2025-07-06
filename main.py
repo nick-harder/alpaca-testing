@@ -122,7 +122,7 @@ for cfg in scenarios:
     # print_scenario_info(cfg)
     for variant in ['baseline']:
         model = build_model(cfg, 
-                            allow_simultaneous_import_export=False,
+                            allow_simultaneous_import_export=True,
                             )
         result = solve_model(model)
         print_results(cfg, variant, result)
