@@ -1,0 +1,269 @@
+# test_scenarios.yaml
+cases:
+  - name: Original_3_node
+    nodes: [A, B, C]
+    line_cap:
+      A,B: 100
+      A,C: 100
+      B,C: 20
+    demand:
+      A: 480
+      B: 200
+      C: 200
+    bids:
+      A:
+        - [200, 10]
+        - [200, 15]
+        - [100, 30]
+        - [100, 40]
+      B:
+        - [500, 20]
+        - [100, 25]
+        - [100, 35]
+      C:
+        - [100, 20]
+        - [100, 50]
+        - [100, 60]
+
+  - name: Chain_3_node_weak_middle
+    nodes: [A, B, C]
+    line_cap:
+      A,B: 100
+      B,A: 100
+      B,C: 30
+      C,B: 30
+    demand:
+      A: 150
+      B: 100
+      C: 200
+    bids:
+      A:
+        - [150, 10]
+        - [100, 25]
+      B:
+        - [80, 15]
+        - [80, 35]
+      C:
+        - [200, 20]
+
+  - name: Ring_4_node
+    nodes: [A, B, C, D]
+    line_cap:
+      A,B: 50
+      B,A: 50
+      B,C: 75
+      C,B: 75
+      C,D: 100
+      D,C: 100
+      D,A: 60
+      A,D: 60
+    demand:
+      A: 100
+      B: 100
+      C: 150
+      D: 80
+    bids:
+      A:
+        - [80, 12]
+        - [50, 30]
+      B:
+        - [100, 15]
+      C:
+        - [60, 10]
+        - [80, 25]
+        - [50, 40]
+      D:
+        - [80, 20]
+        - [20, 45]
+
+  - name: Star_5_node
+    nodes: [Center, N1, N2, N3, N4]
+    line_cap:
+      N1,Center: 70
+      Center,N1: 70
+      N2,Center: 70
+      Center,N2: 70
+      N3,Center: 70
+      Center,N3: 70
+      N4,Center: 70
+      Center,N4: 70
+    demand:
+      Center: 50
+      N1: 60
+      N2: 80
+      N3: 100
+      N4: 90
+    bids:
+      Center:
+        - [50, 8]
+        - [50, 30]
+      N1:
+        - [60, 12]
+        - [20, 50]
+      N2:
+        - [80, 15]
+      N3:
+        - [70, 10]
+        - [30, 35]
+      N4:
+        - [90, 18]
+
+  - name: Mesh_4_node
+    nodes: [A, B, C, D]
+    line_cap:
+      A,B: 80
+      B,A: 80
+      A,C: 120
+      C,A: 120
+      A,D: 50
+      D,A: 50
+      B,C: 70
+      C,B: 70
+      B,D: 60
+      D,B: 60
+      C,D: 90
+      D,C: 90
+    demand:
+      A: 150
+      B: 100
+      C: 200
+      D: 120
+    bids:
+      A:
+        - [100, 11]
+        - [80, 29]
+      B:
+        - [90, 14]
+        - [30, 48]
+      C:
+        - [150, 10]
+        - [50, 40]
+      D:
+        - [120, 20]
+
+  - name: Bottleneck_hub_3_node
+    nodes: [X, Y, Z]
+    line_cap:
+      X,Y: 50
+      Y,X: 50
+      Y,Z: 50
+      Z,Y: 50
+      X,Z: 10
+      Z,X: 10
+    demand:
+      X: 120
+      Y: 30
+      Z: 120
+    bids:
+      X:
+        - [120, 10]
+      Y:
+        - [30, 5]
+        - [20, 25]
+      Z:
+        - [120, 12]
+
+  - name: Chain_3_node_cheap_end
+    nodes: [A, B, C]
+    line_cap:
+      A,B: 100
+      B,A: 100
+      B,C: 30
+      C,B: 30
+    demand:
+      A: 150
+      B:  80
+      C: 200
+    bids:
+      A:
+        - [150, 10]
+        - [ 50, 25]
+      B:
+        - [ 80, 15]
+        - [ 80, 35]
+      C:
+        - [200, 20]
+
+  - name: Uneven_Ring_4_node
+    nodes: [A, B, C, D]
+    line_cap:
+      A,B: 50
+      B,A: 50
+      B,C: 75
+      C,B: 75
+      C,D: 100
+      D,C: 100
+      D,A: 60
+      A,D: 60
+    demand:
+      A: 120
+      B: 90
+      C: 170
+      D: 80
+    bids:
+      A:
+        - [ 70, 11]
+        - [ 60, 30]
+      B:
+        - [100, 14]
+        - [ 20, 45]
+      C:
+        - [120, 10]
+        - [ 50, 40]
+      D:
+        - [ 80, 20]
+        - [ 20, 35]
+
+  - name: Star_4_spokes
+    nodes: [Center, N1, N2, N3, N4]
+    line_cap:
+      N1,Center: 70
+      Center,N1: 70
+      N2,Center: 70
+      Center,N2: 70
+      N3,Center: 70
+      Center,N3: 70
+      N4,Center: 70
+      Center,N4: 70
+    demand:
+      Center: 40
+      N1:     60
+      N2:     80
+      N3:    100
+      N4:     90
+    bids:
+      Center:
+        - [ 40, 8]
+        - [ 40, 30]
+      N1:
+        - [ 60,12]
+        - [ 20,50]
+      N2:
+        - [ 80,20]
+      N3:
+        - [100,15]
+      N4:
+        - [ 90,18]
+
+  - name: Triangle_mixed_bids
+    nodes: [A, B, C]
+    line_cap:
+      A,B: 100
+      B,A: 100
+      B,C: 100
+      C,B: 100
+      C,A: 50
+      A,C: 50
+    demand:
+      A: 120
+      B: 140
+      C: 80
+    bids:
+      A:
+        - [100,12]
+        - [ 50,28]
+      B:
+        - [140,20]
+      C:
+        - [ 80,10]
+        - [ 40,35]
