@@ -3,9 +3,7 @@
 # Loads scenarios and calls build_model + solve_model, gathering results for analysis
 
 import yaml
-from market_clearing import solve_model
-from market_clearing import build_model
-
+from market_clearing import solve_all_cases
 
 def load_scenarios(path='test_scenarios.yaml'):
     """
@@ -120,11 +118,7 @@ def print_results(cfg, variant, result):
 scenarios = load_scenarios()
 for cfg in scenarios:
     # print_scenario_info(cfg)
-    for variant in ['baseline']:
-        model = build_model(cfg, 
-                            allow_simultaneous_import_export=True,
-                            )
-        result = solve_model(model)
-        print_results(cfg, variant, result)
-
-# %%
+    for variant in ['new']:
+        results = solve_all_cases(cfg)
+        for variant, result in results.items():
+            print_results(cfg, variant, result)
